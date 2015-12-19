@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Sigma.Components.Input;
+using Sigma.Components.GameStates;
 
 namespace Sigma
 {
@@ -13,6 +14,7 @@ namespace Sigma
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameStateManager gameStateManager;
 
         public Game1()
         {
@@ -20,8 +22,12 @@ namespace Sigma
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.IsFullScreen = false;
+
             Content.RootDirectory = "Content";
+
+            gameStateManager = new GameStateManager(this);
             Components.Add(new InputHandler(this));
+            Components.Add(gameStateManager);
         }
 
         /// <summary>
