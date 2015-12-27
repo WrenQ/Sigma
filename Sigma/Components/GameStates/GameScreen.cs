@@ -15,8 +15,14 @@ namespace Sigma.Components.GameStates
         Inactive
     }
 
+    /// <summary>
+    /// Base clase for all game screens containing a list of components 8such as controls or sprites),
+    /// its identifier, the screen manager throughout it is handled, its state (for transitioning purposes)
+    /// and its alpha value so black transparency when fading can be calculated.
+    /// </summary>
     public class GameScreen : DrawableGameComponent
     {
+        #region Field Region
 
         List<GameComponent> childComponents;
         GameScreen identifier;
@@ -24,6 +30,9 @@ namespace Sigma.Components.GameStates
         float alpha = 1f;
         ScreenState state = ScreenState.Inactive;
 
+        #endregion
+
+        #region Properties region
         public List<GameComponent> Components
         {
             get { return childComponents; }
@@ -54,6 +63,8 @@ namespace Sigma.Components.GameStates
             get { return state; }
             set { state = value; }
         }
+        #endregion
+        #region Constructor region
 
         public GameScreen(Game game, ScreenManager manager)
             : base(game)
@@ -62,7 +73,8 @@ namespace Sigma.Components.GameStates
             identifier = this;
             ScreenManager = manager;
         }
-
+        #endregion
+        #region Monogame region
         public override void Initialize()
         {
             base.Initialize();
@@ -106,7 +118,8 @@ namespace Sigma.Components.GameStates
             }
             base.Draw(gameTime);
         }
-
+        #endregion
+        #region Methods region
         internal protected virtual void ScreenChanged(object sender, EventArgs e)
         {
             if (ScreenManager.ActiveScreen == Identifier)
@@ -115,6 +128,10 @@ namespace Sigma.Components.GameStates
                 HideScreen();
         }
 
+        /// <summary>
+        /// Enables the current screen and all its child components.
+        /// If the current screen has drawable components then they are set to visible so they can be drawn when Draw method is called.
+        /// </summary>
         protected virtual void ShowScreen()
         {
             Visible = true;
@@ -128,6 +145,10 @@ namespace Sigma.Components.GameStates
 
         }
 
+        /// <summary>
+        /// Unables the current screen and all its child components.
+        /// If the current screen has drawable components then they are set to invisible so they are not drawn when Draw method is called.
+        /// </summary>
         protected virtual void HideScreen()
         {
             Visible = false;
@@ -139,6 +160,7 @@ namespace Sigma.Components.GameStates
                     ((DrawableGameComponent)component).Visible = false;
             }
         }
+        #endregion
     }
 }
 

@@ -4,7 +4,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Sigma.Components.Input
 {
-    public class InputHandler : Microsoft.Xna.Framework.GameComponent
+    /// <summary>
+    /// This class manages the user's input when using a compatible game pad.
+    /// </summary>
+    public class InputHandler : GameComponent
     {
         #region Field Region
 
@@ -37,7 +40,7 @@ namespace Sigma.Components.Input
 
         #endregion
 
-        #region XNA methods
+        #region Monogame methods
 
         public override void Initialize()
         {
@@ -55,6 +58,9 @@ namespace Sigma.Components.Input
 
         #region General Method Region
 
+        /// <summary>
+        /// Clears the last game pad state
+        /// </summary>
         public static void Flush()
         {
             lastGamepadState = gamepadState;
@@ -64,16 +70,28 @@ namespace Sigma.Components.Input
 
         #region Gamepad region
 
+        /// <summary>
+        /// Checks whether the desired button has been released by comparing its current and last state
+        /// </summary>
+        /// <param name="button">The button to be checked.</param>
         public static bool ButtonReleased(Buttons button)
         {
             return gamepadState.IsButtonUp(button) && lastGamepadState.IsButtonDown(button);
         }
 
+        /// <summary>
+        /// Checks whether the desired button has been pressed by comparing its current and last state
+        /// </summary>
+        /// <param name="button">The button to be checked.</param>
         public static bool ButtonPressed(Buttons button)
         {
             return gamepadState.IsButtonDown(button) && lastGamepadState.IsButtonUp(button);
         }
 
+        /// <summary>
+        /// Checks whether the desired button is being held.
+        /// </summary>
+        /// <param name="button">The button to be checked.</param>
         public static bool ButtonDown(Buttons button)
         {
             return gamepadState.IsButtonDown(button);
