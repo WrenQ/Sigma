@@ -42,8 +42,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Components\GameStates\GameState.cs" />
-    <Compile Include="Components\GameStates\GameStateManager.cs" />
+    <Compile Include="Components\GameStates\GameScreen.cs" />
+    <Compile Include="Components\GameStates\ScreenManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Components\Input\InputHandler.cs" />
     <Compile Include="Program.cs" />
@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Graphics\blank.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

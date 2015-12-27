@@ -14,7 +14,7 @@ namespace Sigma
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        GameStateManager gameStateManager;
+        ScreenManager gameScreenManager;
 
         public Game1()
         {
@@ -25,9 +25,9 @@ namespace Sigma
 
             Content.RootDirectory = "Content";
 
-            gameStateManager = new GameStateManager(this);
             Components.Add(new InputHandler(this));
-            Components.Add(gameStateManager);
+            gameScreenManager = new ScreenManager(this);
+            Components.Add(gameScreenManager);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Sigma
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 
