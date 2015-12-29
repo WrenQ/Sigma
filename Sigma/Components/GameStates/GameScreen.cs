@@ -24,7 +24,7 @@ namespace Sigma.Components.GameStates
     {
         #region Field Region
 
-        List<GameComponent> childComponents;
+        List<GameComponent> subComponents;
         GameScreen identifier;
         protected ScreenManager ScreenManager;
         float alpha = 1f;
@@ -35,7 +35,7 @@ namespace Sigma.Components.GameStates
         #region Properties region
         public List<GameComponent> Components
         {
-            get { return childComponents; }
+            get { return subComponents; }
         }
 
         public GameScreen Identifier
@@ -69,7 +69,7 @@ namespace Sigma.Components.GameStates
         public GameScreen(Game game, ScreenManager manager)
             : base(game)
         {
-            childComponents = new List<GameComponent>();
+            subComponents = new List<GameComponent>();
             identifier = this;
             ScreenManager = manager;
         }
@@ -96,7 +96,7 @@ namespace Sigma.Components.GameStates
                     state = ScreenState.Active;
             }
 
-            foreach (GameComponent component in childComponents)
+            foreach (GameComponent component in subComponents)
             {
                 if (component.Enabled)
                     component.Update(gameTime);
@@ -107,7 +107,7 @@ namespace Sigma.Components.GameStates
         public override void Draw(GameTime gameTime)
         {
             DrawableGameComponent drawComponent;
-            foreach (GameComponent component in childComponents)
+            foreach (GameComponent component in subComponents)
             {
                 if (component is DrawableGameComponent)
                 {
@@ -136,7 +136,7 @@ namespace Sigma.Components.GameStates
         {
             Visible = true;
             Enabled = true;
-            foreach (GameComponent component in childComponents)
+            foreach (GameComponent component in subComponents)
             {
                 component.Enabled = true;
                 if (component is DrawableGameComponent)
@@ -153,7 +153,7 @@ namespace Sigma.Components.GameStates
         {
             Visible = false;
             Enabled = false;
-            foreach (GameComponent component in childComponents)
+            foreach (GameComponent component in subComponents)
             {
                 component.Enabled = false;
                 if (component is DrawableGameComponent)
