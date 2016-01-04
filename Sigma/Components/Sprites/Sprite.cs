@@ -27,6 +27,12 @@ namespace Sigma.Components.Sprites
             get { return sourceRectangle.Height; }
         }
 
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set { texture = value; }
+        }
+
         public Rectangle SpriteRectangle
         {
             get { return new Rectangle((int)position.X, (int)position.Y, Width, Height); }

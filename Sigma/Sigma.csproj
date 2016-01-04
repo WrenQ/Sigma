@@ -42,10 +42,16 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\Gameplay\Party.cs" />
     <Compile Include="Components\GameStates\GameScreen.cs" />
     <Compile Include="Components\GameStates\ScreenManager.cs" />
+    <Compile Include="Components\Screens\BaseGameScreen.cs" />
+    <Compile Include="Components\Screens\GamePlayScreen.cs" />
+    <Compile Include="Components\Sprites\AnimatingSprite.cs" />
     <Compile Include="Components\Sprites\Animation.cs" />
+    <Compile Include="Components\Sprites\Camera.cs" />
     <Compile Include="Components\Sprites\Sprite.cs" />
+    <Compile Include="Components\World\Map.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Components\Input\InputHandler.cs" />
     <Compile Include="Program.cs" />
@@ -62,7 +68,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Graphics\blank.png" />
+    <Content Include="Content\Graphics\blank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Graphics\Spritesheets\SpriteIndra.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\Tilesets\hyptosis_sprites-and-tiles-for-you.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\Tilesets\hyptosis_til-art-batch-2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\Tilesets\hyptosis_tile-art-batch-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\Tilesets\hyptosis_tile-art-batch-3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\Tilesets\hyptosis_tile-art-batch-4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\Tilesets\hyptosis_tile-art-batch-5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -71,7 +100,6 @@
   <ItemGroup>
     <Folder Include="Content\Audio\" />
     <Folder Include="Content\Graphics\GUI\" />
-    <Folder Include="Content\Graphics\Spritesheets\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SigmaLibrary\SigmaLibrary.csproj">
@@ -81,6 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Content\Maps\MapFiles\Meru.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

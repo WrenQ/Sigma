@@ -25,8 +25,9 @@ namespace Sigma.Components.Sprites
     {
         #region Fields region
         List<Rectangle> frames;
-        int currentFrame, frameDuration, frameWidth, frameHeight;
-        int timer = 0;
+        short currentFrame, frameDuration, frameWidth, frameHeight;
+        short timer = 0;
+        bool isLoop = true;
         #endregion
         #region Properties region
         public Rectangle CurrentRectangleFrame
@@ -34,53 +35,60 @@ namespace Sigma.Components.Sprites
             get { return frames.ElementAt<Rectangle>(currentFrame); }
         }
 
-        public int FrameDuration
+        public short FrameDuration
         {
             get { return frameDuration; }
             set { frameDuration = value; }
         }
 
-        public int CurrentFrame
+        public short CurrentFrame
         {
             get { return currentFrame; }
             set
             {
-                currentFrame = MathHelper.Clamp(value, 0, frames.Count - 1);
+                currentFrame = (short)MathHelper.Clamp(value, 0, frames.Count - 1);
             }
         }
 
-        public int FrameWidth
+        public short FrameWidth
         {
             get { return frameWidth; }
         }
 
-        public int FrameHeight
+        public short FrameHeight
         {
             get { return frameHeight; }
         }
 
-        public int Timer
+        public short Timer
         {
             get { return timer; }
             set
             {
-                timer = MathHelper.Clamp(value, 0, frameDuration);
+                timer = (short)MathHelper.Clamp(value, 0, frameDuration);
             }
+        }
+
+        public bool IsLoop
+        {
+            get { return isLoop; }
+            set { isLoop = value; }
         }
         #endregion
         #region Constructor region
-        public Animation(int numberFrames, int frameWidth, int frameHeight, int rowShift, int columnShift, int duration)
+        public Animation(short numberFrames, short frameWidth, short frameHeight, short rowShift, short columnShift, short duration)
         {
-            frames = new List<Rectangle>(numberFrames);
+            frames = new List<Rectangle>();
             this.frameWidth = frameWidth;
             this.frameHeight = frameHeight;
             for(int i = 0; i < numberFrames; i++)
             {
-                frames[i] = new Rectangle(
-                    rowShift + i * frameWidth,
+                Rectangle rect = new Rectangle(
+                    rowShift + (i * frameWidth),
                     columnShift,
                     frameWidth,
                     frameHeight);
+                frames.Add(rect);
             }
 
             currentFrame = 0;
@@ -93,9 +101,34 @@ namespace Sigma.Components.Sprites
             Timer++;
             if(Timer == FrameDuration)
             {
-                currentFrame = (currentFrame + 1) & frames.Count;
+                if (isLoop)
+                {
+                    currentFrame = (short)((currentFrame + 1) % frames.Count);
+                }
+                else
+                {
+                    if(currentFrame < frames.Count - 1)
+                    {
+                        currentFrame++;
+                    }
+                }
                 Timer = 0;
             }
+        }
+        #endregion
+        #region Methods region
+        public void ResetAnimation()
+        {
+            Timer = 0;
+            currentFrame = 0;
+        }
+
+        public void SwitchAnimation()
+        {
+            if (isLoop)
+                isLoop = false;
+            else
+                isLoop = true;
         }
         #endregion
     }

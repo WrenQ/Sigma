@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 using Sigma.Components.Input;
 using Sigma.Components.GameStates;
+using Sigma.Components.Screens;
 
 namespace Sigma
 {
@@ -15,6 +16,23 @@ namespace Sigma
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         ScreenManager gameScreenManager;
+        GamePlayScreen gamePlayScreen;
+        Rectangle screenRectangle;
+
+        public GamePlayScreen GamePlayScreen
+        {
+            get { return gamePlayScreen; }
+        }
+
+        public Rectangle ScreenRectangle
+        {
+            get { return screenRectangle; }
+        }
+
+        public SpriteBatch SpriteBatch
+        {
+            get { return spriteBatch; }
+        }
 
         public Game1()
         {
@@ -22,12 +40,15 @@ namespace Sigma
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.IsFullScreen = false;
-
+            screenRectangle = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             Content.RootDirectory = "Content";
 
             Components.Add(new InputHandler(this));
             gameScreenManager = new ScreenManager(this);
             Components.Add(gameScreenManager);
+
+            gamePlayScreen = new GamePlayScreen(this, gameScreenManager);
+            gameScreenManager.ChangeScreens(gamePlayScreen);
         }
 
         /// <summary>
@@ -89,8 +110,8 @@ namespace Sigma
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-
             base.Draw(gameTime);
+            SpriteBatch.End();
         }
     }
 }
